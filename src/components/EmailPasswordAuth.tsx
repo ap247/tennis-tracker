@@ -47,8 +47,10 @@ export const EmailPasswordAuth: React.FC<EmailPasswordAuthProps> = ({ onBack }) 
       setError(null);
       
       if (isSignUp) {
+        console.log('📝 Attempting to create new account...');
         await signUpWithEmail(formData.email, formData.password, formData.displayName);
       } else {
+        console.log('🔐 Attempting to sign in...');
         await signInWithEmail(formData.email, formData.password);
       }
     } catch (error: any) {
@@ -71,8 +73,21 @@ export const EmailPasswordAuth: React.FC<EmailPasswordAuthProps> = ({ onBack }) 
         case 'auth/invalid-email':
           setError('Invalid email address');
           break;
+        case 'auth/operation-not-allowed':
+          if (isSignUp) {
+            setError('Account creation is disabled. Please try Google sign-in or guest mode.');
+          } else {
+            setError('Email/password authentication is not enabled. Please try Google sign-in or guest mode.');
+          }
+          break;
+        case 'auth/admin-restricted-operation':
+          setError('This operation is restricted. Please contact support.');
+          break;
+        case 'auth/invalid-credential':
+          setError('Invalid email or password. Please check your credentials.');
+          break;
         default:
-          setError(error.message || 'Authentication failed');
+          setError(error.message || `${isSignUp ? 'Account creation' : 'Authentication'} failed`);
       }
     } finally {
       setIsLoading(false);

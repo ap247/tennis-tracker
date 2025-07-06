@@ -90,9 +90,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signInWithEmail = async (email: string, password: string) => {
     try {
+      console.log('🔐 Starting email sign-in for:', email);
       setLoading(true);
       localStorage.removeItem('guestUser'); // Clear guest mode
       await signInWithEmailAndPassword(auth, email, password);
+      console.log('✅ Email sign-in successful');
     } catch (error) {
       console.error('❌ Email sign-in error:', error);
       throw error;
@@ -103,10 +105,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signUpWithEmail = async (email: string, password: string, displayName: string) => {
     try {
+      console.log('🔐 Starting email sign-up for:', email);
       setLoading(true);
       localStorage.removeItem('guestUser'); // Clear guest mode
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log('✅ User created, updating profile...');
       await updateProfile(userCredential.user, { displayName });
+      console.log('✅ Email sign-up successful');
     } catch (error) {
       console.error('❌ Email sign-up error:', error);
       throw error;

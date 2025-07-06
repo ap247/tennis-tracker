@@ -12,12 +12,20 @@ export const Login: React.FC = () => {
 
   const handleGoogleSignIn = async () => {
     try {
+      console.log('🔐 Starting Google login...');
       setIsLoading(true);
       setError(null);
       await signInWithGoogle();
+      console.log('✅ Google login successful');
     } catch (error: any) {
-      console.error('Google login error:', error);
-      setError(error.message || 'Failed to sign in with Google');
+      console.error('❌ Google login error:', error);
+      if (error.code === 'auth/operation-not-allowed') {
+        setError('Google authentication is not enabled. Please try guest mode.');
+      } else if (error.code === 'auth/popup-closed-by-user') {
+        setError('Sign-in was cancelled. Please try again.');
+      } else {
+        setError(error.message || 'Failed to sign in with Google');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -25,11 +33,13 @@ export const Login: React.FC = () => {
 
   const handleGuestSignIn = async () => {
     try {
+      console.log('🎾 Starting guest login...');
       setIsLoading(true);
       setError(null);
       await signInAsGuest();
+      console.log('✅ Guest login successful');
     } catch (error: any) {
-      console.error('Guest login error:', error);
+      console.error('❌ Guest login error:', error);
       setError(error.message || 'Failed to continue as guest');
     } finally {
       setIsLoading(false);
@@ -174,7 +184,7 @@ export const Login: React.FC = () => {
             onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
             onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
           >
-            👤 Continue as Guest (Local Storage Only)
+            🎾 Play as Guest (Local Storage Only)
           </button>
 
           <div style={{ 
@@ -187,10 +197,10 @@ export const Login: React.FC = () => {
           }}>
             <h4 style={{ marginBottom: '0.5rem', color: 'var(--text-color)' }}>Why create an account?</h4>
             <ul style={{ textAlign: 'left', margin: 0, paddingLeft: '1.2rem' }}>
-              <li><strong>Cloud Sync:</strong> Access matches on any device</li>
-              <li><strong>Backup:</strong> Never lose your tennis data</li>
-              <li><strong>Advanced Stats:</strong> Enhanced analytics</li>
-              <li><strong>Guest Mode:</strong> Try it out first (data stays local)</li>
+              <li><strong>🌐 Cloud Sync:</strong> Access matches on any device</li>
+              <li><strong>💾 Backup:</strong> Never lose your tennis data</li>
+              <li><strong>📊 Advanced Stats:</strong> Enhanced analytics</li>
+              <li><strong>🎾 Guest Mode:</strong> Try it out first (data stays local)</li>
             </ul>
           </div>
         </div>
