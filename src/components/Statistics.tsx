@@ -91,8 +91,10 @@ export const Statistics: React.FC<StatisticsProps> = ({ matches }) => {
   }, [matches]);
 
   return (
-    <div className="card">
-      <h2>Performance Statistics</h2>
+    <div className="stats-container">
+      <div className="stats-header">
+        <h2>Performance Statistics</h2>
+      </div>
       
       <div className="stats-grid">
         <div className="stat-item">
@@ -123,18 +125,35 @@ export const Statistics: React.FC<StatisticsProps> = ({ matches }) => {
 
       {recentForm.length > 0 && (
         <div style={{ marginBottom: '1.5rem' }}>
-          <h3 style={{ marginBottom: '0.5rem' }}>Recent Form (Last 10)</h3>
-          <div style={{ display: 'flex', gap: '0.25rem' }}>
+          <h3 style={{ 
+            marginBottom: '0.75rem', 
+            color: 'var(--text-color)', 
+            fontSize: '1.1rem',
+            fontWeight: '600'
+          }}>Recent Form (Last 10)</h3>
+          <div className="dark-section" style={{ 
+            display: 'flex', 
+            gap: '0.4rem', 
+            padding: '1rem', 
+            borderRadius: '12px',
+            background: 'var(--stats-item-bg)',
+            border: '1px solid var(--border-color)'
+          }}>
             {recentForm.map((result, index) => (
               <span
                 key={index}
                 style={{
-                  padding: '0.25rem 0.5rem',
-                  borderRadius: '4px',
-                  fontSize: '0.8rem',
-                  fontWeight: 'bold',
-                  backgroundColor: result === 'W' ? '#d4edda' : '#f8d7da',
-                  color: result === 'W' ? '#155724' : '#721c24'
+                  padding: '0.5rem 0.75rem',
+                  borderRadius: '8px',
+                  fontSize: '0.9rem',
+                  fontWeight: '700',
+                  backgroundColor: result === 'W' ? 'var(--secondary-color)' : 'var(--danger-color)',
+                  color: '#ffffff',
+                  minWidth: '32px',
+                  textAlign: 'center',
+                  display: 'inline-block',
+                  boxShadow: result === 'W' ? '0 2px 8px rgba(28, 231, 131, 0.3)' : '0 2px 8px rgba(249, 109, 109, 0.3)',
+                  transition: 'all 0.3s ease'
                 }}
               >
                 {result}

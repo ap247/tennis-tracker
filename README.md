@@ -1,24 +1,45 @@
-# 🎾 Tennis Tracker
+# 🎾 Breakpoint
 
 A mobile-first React web application for tracking tennis matches, opponents, and performance statistics.
 
+## 🌐 Live Demo
+**Try it now:** [https://tennis-tracker-558a4.web.app](https://tennis-tracker-558a4.web.app)
+
 ## Features
 
+### 🔐 Multiple Authentication Options
+- **Google Sign-In**: One-click OAuth authentication
+- **Email/Password**: Custom account creation and sign-in
+- **Guest Mode**: Try the app without creating an account (local storage only)
+
+### 📊 Match Tracking & Analytics
 - **Match Logging**: Record match details including date, opponent, score, location, and surface
+- **Visual Scorekeeper**: Interactive set-by-set scoring with tiebreak support
 - **Opponent Tracking**: Keep track of opponents and win/loss records against them
 - **Performance Statistics**: Auto-calculated stats including win percentage, sets played, and performance by surface
 - **Match History**: Searchable and filterable timeline of all matches
 - **Notes & Reflection**: Add post-match notes for strategy and analysis
+
+### 🎨 Modern Design & UX
+- **Dual Themes**: Professional Greenhouse-inspired light mode & Hulu-style dark mode
 - **Mobile-First Design**: Optimized for mobile devices with PWA capabilities
-- **Firebase Integration**: Cloud storage with localStorage fallback for offline use
+- **Responsive Layout**: Seamless experience across all device sizes
+- **Motion Graphics**: Smooth animations and transitions
+
+### 💾 Reliable Data Storage
+- **Firebase Integration**: Cloud storage with real-time sync for authenticated users
+- **Smart Fallback**: localStorage backup for offline functionality
+- **User Isolation**: Each user's data is completely separate and secure
 
 ## Tech Stack
 
-- React 18 with TypeScript
-- Firebase Firestore for data storage
-- CSS3 with responsive design
-- PWA capabilities
-- Local storage fallback
+- **Frontend**: React 18 with TypeScript
+- **Authentication**: Firebase Auth (Google OAuth + Email/Password)
+- **Database**: Firebase Firestore with localStorage fallback
+- **Styling**: CSS3 with CSS Variables for theming
+- **Deployment**: Firebase Hosting
+- **Build Tool**: Create React App
+- **PWA**: Progressive Web App capabilities
 
 ## Setup
 
@@ -102,6 +123,22 @@ Launches the test runner in interactive watch mode
 
 ### `npm run build`
 Builds the app for production to the `build` folder
+
+### `npm run deploy`
+Builds and deploys the app to Firebase Hosting
+
+### `npm run deploy:vercel`
+Builds and deploys the app to Vercel
+
+## Deployment
+
+The app is automatically deployed to Firebase Hosting. For manual deployment:
+
+```bash
+npm run deploy
+```
+
+For other deployment options, see [deploy.md](deploy.md)
 
 ## Contributing
 

@@ -9,6 +9,8 @@ export interface Match {
   notes?: string;
   setsPlayed: number;
   tournament?: string;
+  userId?: string;
+  createdAt?: string;
 }
 
 export interface Opponent {
